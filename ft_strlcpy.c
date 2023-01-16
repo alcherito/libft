@@ -6,13 +6,13 @@
 /*   By: dalchaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:31:06 by dalchaev          #+#    #+#             */
-/*   Updated: 2023/01/16 16:48:53 by dalchaev         ###   ########.fr       */
+/*   Updated: 2023/01/16 19:59:46 by dalchaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dest, char *src, size_t size)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
 	size_t	i;
 
