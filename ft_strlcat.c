@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalchaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/13 14:11:20 by dalchaev          #+#    #+#             */
-/*   Updated: 2023/01/16 16:53:19 by dalchaev         ###   ########.fr       */
+/*   Created: 2023/01/16 17:29:45 by dalchaev          #+#    #+#             */
+/*   Updated: 2023/01/16 17:29:55 by dalchaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft.h"
 
-# include <stddef.h>
+size_t	ft_strlcat(char *dest, char *src, size_t size)
+{
+	size_t	i;
+	size_t	k;
 
-int		ft_isalnum(int c);
-int		ft_isalpha(int c);
-int		ft_isascii(int c);
-int		ft_isdigit(int c);
-int		ft_isprint(int c);
-void	*ft_memset(void *str, int c, int n);
-int		ft_strlen(char *str);
-size_t	ft_strlcpy(char *dest, char *src, size_t size);
-size_t	ft_strlcat(char *dest, char *src, size_t size);
-
-#endif
+	i = 0;
+	k = 0;
+	while (dest[i] != '\0')
+		i++;
+	while (i < (size - i) && src[k] != '\0')
+	{
+		dest[i] = src[k];
+		i++;
+		k++;
+	}
+	if (i + k < size)
+		dest[i] = '\0';
+	while (src[k] != '\0')
+	{
+		k++;
+	}
+	return (i + k);
+}

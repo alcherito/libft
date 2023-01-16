@@ -10,12 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 void	*ft_memset(void *str, int c, int n)
 {
-	int	i;
-	int	*temp;
+	int		i;
+	char	*temp;
 
-	temp = str;
+	temp = (char *)str;
 	i = 0;
 	while (i < n)
 	{
@@ -23,5 +25,5 @@ void	*ft_memset(void *str, int c, int n)
 		temp++;
 		i++;
 	}
-	return (temp);
+	return (str);
 }
