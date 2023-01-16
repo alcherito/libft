@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalchaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 15:46:58 by dalchaev          #+#    #+#             */
-/*   Updated: 2023/01/11 16:53:36 by dalchaev         ###   ########.fr       */
+/*   Created: 2023/01/16 16:31:06 by dalchaev          #+#    #+#             */
+/*   Updated: 2023/01/16 16:48:53 by dalchaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalnum(int c)
+#include "libft.h"
+
+size_t	ft_strlcpy(char *dest, char *src, size_t size)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
-		|| (c >= '0' && c <= '9'))
-		return (1);
-	else
-		return (0);
+	size_t	i;
+
+	i = 0;
+	while (i < size && src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	while (i < size)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	return (i);
 }

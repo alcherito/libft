@@ -17,16 +17,3 @@ int	ft_isprint(int c)
 	else
 		return (0);
 }
-/*
-#include <stdio.h>
-#include <ctype.h>
-
-int	main(void)
-{
-	int	c;
-
-	c = 48;
-	int n = isprint(c);
-	int m = ft_isprint(c);
-	printf("%d %d", n, m);
-}*/
