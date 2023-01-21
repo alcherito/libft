@@ -18,3 +18,9 @@ fclean: clean
 	rm -f $(NAME)
 	
 re: fclean all
+
+bonus: $(NAME)
+
+so:
+	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SOURCES)
+	gcc -nostartfiles -shared -o libft.so $(OBJECTS)

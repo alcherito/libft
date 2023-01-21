@@ -24,7 +24,7 @@ char	*ft_strchr(const char *str, int c)
 		else
 			res++;
 	}
-	if (c == '\0')
+	if (c == '\0' && *res == '\0')
 		return (res);
 	else
 		res = NULL;
