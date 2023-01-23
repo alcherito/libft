@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalchaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/21 20:05:57 by dalchaev          #+#    #+#             */
-/*   Updated: 2023/01/21 20:18:52 by dalchaev         ###   ########.fr       */
+/*   Created: 2023/01/23 16:33:30 by dalchaev          #+#    #+#             */
+/*   Updated: 2023/01/23 17:12:45 by dalchaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*res;
-	size_t	size;
+	size_t		len;
+	char		*res;
 
-	size = ft_strlen(s + start);
-	if (size <= len)
-		len = size;
-	res = malloc((len + 1) * sizeof(char));
-	if (!res)
-		return (NULL);
-	ft_strlcpy(res, s + start, len + 1);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	res = ft_calloc(len + 1, sizeof(char));
+	ft_strlcpy(res, s1, ft_strlen(s1) + 1);
+	ft_strlcat(res, s2, len + 1);
 	return (res);
 }
