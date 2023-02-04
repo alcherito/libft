@@ -1,42 +1,69 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dalchaev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/01 16:40:44 by dalchaev          #+#    #+#             */
+/*   Updated: 2023/02/04 23:36:30 by dalchaev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-char **ft_split(char const *s, char c)
+int	ft_count_words(const char *str, char c)
 {
-	char	**res;
-	char	*temp;
-	int		i;
-	int		j;
-	int		wordnum;
-	int		wordlen;
+	int	n;
 
-	if (*s == 0)
-		return (NULL);
-	wordnum = 0; 
-	i = 0;
-	temp = &c;
-	s = ft_strtrim(s, temp);
-	while (s[i] != 0)
+	n = 0;
+	while (*str != 0)
 	{
-		if (s[i] == c)
-			wordnum++;
+		if (*str != c && (*(str + 1) == c || *(str + 1) == '\0'))
+			n++;
+		str++;
+	}
+	return (n);
+}
+
+char	**ft_fill_with_words(const char *str, char c, int n)
+{
+	int		i;
+	int		len;
+	char	**res;
+	char	*wordend;
+
+	i = 0;
+	res = (char **)ft_calloc(n + 1, sizeof(char *));
+	while (i < n)
+	{
+		wordend = ft_strchr(str, c);
+		if (i == n - 1)
+			wordend = ft_strchr(str, '\0');
+		len = wordend - str;
+		res[i] = (char *)ft_calloc(len + 1, sizeof(char));
+		ft_memmove(res[i], str, len);
+		str = ft_strchr(str, c);
+		if (str)
+		{
+			while (*str == c)
+				str++;
+		}
 		i++;
 	}
-	wordnum++;
-	res = (char **)calloc(wordnum + 1, sizeof(char *));
-	j = 0;
-	while (j <= wordnum)
-	{
-		temp = ft_strchr(s, c);
-		wordlen = temp - s;
-		
-		res[j] = (char *)calloc(wordlen + 1, sizeof(char));
-		ft_strlcpy(res[j], s, wordlen + 1);
-		s = ft_strchr(s, c);
-		while (*s == c)
-			s++;
-	}
-	res[j] = NULL;
+	res[i] = NULL;
+	return (res);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**res;
+	int		wordnum;
+
+	s = ft_strtrim(s, &c);
+	wordnum = ft_count_words(s, c);
+	res = ft_fill_with_words(s, c, wordnum);
+	free((void *)s);
 	return (res);
 }
