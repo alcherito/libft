@@ -6,7 +6,7 @@
 /*   By: dalchaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:40:44 by dalchaev          #+#    #+#             */
-/*   Updated: 2023/02/04 23:36:30 by dalchaev         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:14:53 by dalchaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,14 @@ char	**ft_fill_with_words(const char *str, char c, int n)
 char	**ft_split(char const *s, char c)
 {
 	char	**res;
+	char	*temp;
 	int		wordnum;
 
-	s = ft_strtrim(s, &c);
-	wordnum = ft_count_words(s, c);
-	res = ft_fill_with_words(s, c, wordnum);
-	free((void *)s);
+	temp = ft_strtrim(s, &c);
+	wordnum = ft_count_words(temp, c);
+	res = ft_fill_with_words(temp, c, wordnum);
+	if (!res)
+		return (NULL);
+	free(temp);
 	return (res);
 }
