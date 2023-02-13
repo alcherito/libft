@@ -39,11 +39,11 @@ char	**ft_fill_with_words(const char *str, char c, int n)
 	while (i < n)
 	{
 		wordend = ft_strchr(str, c);
-		if (i == n - 1)
+		if (i == n - 1 && c != 0)
 			wordend = ft_strchr(str, '\0');
 		len = wordend - str;
 		res[i] = (char *)ft_calloc(len + 1, sizeof(char));
-		ft_memmove(res[i], str, len);
+		ft_strlcpy(res[i], str, len + 1);
 		str = ft_strchr(str, c);
 		if (str)
 		{
@@ -59,14 +59,15 @@ char	**ft_fill_with_words(const char *str, char c, int n)
 char	**ft_split(char const *s, char c)
 {
 	char	**res;
-	char	*temp;
 	int		wordnum;
 
-	temp = ft_strtrim(s, &c);
-	wordnum = ft_count_words(temp, c);
-	res = ft_fill_with_words(temp, c, wordnum);
+	if (c != 0)
+		s = ft_strtrim(s, &c);
+	wordnum = ft_count_words(s, c);
+	res = ft_fill_with_words(s, c, wordnum);
 	if (!res)
 		return (NULL);
-	free(temp);
+	if (c != 0)
+		free((void *)s);
 	return (res);
 }
