@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalchaev <dalchaev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dalchaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:04:43 by dalchaev          #+#    #+#             */
-/*   Updated: 2023/01/21 19:52:42 by dalchaev         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:02:38 by dalchaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	i = 0;
 	if (*little == 0)
 		return ((char *)big);
-	while (*big != '\0' && ft_strlen(little) <= (len - i))
+	if (!big && len == 0)
+		return (NULL);
+	while (*big && ft_strlen(little) <= (len - i))
 	{
 		if (ft_strncmp(big, little, ft_strlen(little)) == 0)
 			return ((char *)big);

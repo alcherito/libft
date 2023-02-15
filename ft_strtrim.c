@@ -6,7 +6,7 @@
 /*   By: dalchaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 16:56:55 by dalchaev          #+#    #+#             */
-/*   Updated: 2023/01/23 17:15:00 by dalchaev         ###   ########.fr       */
+/*   Updated: 2023/02/14 16:40:27 by dalchaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	i = 0;
 	j = ft_strlen(s1);
 	if (ft_strlen(set) == 0 || j == 0)
-	{
-		res = ft_strdup((char *)s1);
-		return (res);
-	}
+		return (ft_strdup((char *)s1));
 	while (i <= j)
 	{
 		if (ft_strchr(set, s1[i]))
@@ -37,6 +34,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (i > j)
 		return (ft_strdup(""));
 	res = ft_calloc(j - i + 2, sizeof(char));
+	if (!res)
+		return (NULL);
 	ft_strlcpy(res, s1 + i, j - i + 2);
 	return (res);
 }

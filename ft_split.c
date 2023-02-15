@@ -6,7 +6,7 @@
 /*   By: dalchaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:40:44 by dalchaev          #+#    #+#             */
-/*   Updated: 2023/02/08 15:14:53 by dalchaev         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:27:50 by dalchaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,13 @@ int	ft_count_words(const char *str, char c)
 	return (n);
 }
 
-char	**ft_fill_with_words(const char *str, char c, int n)
+char	**ft_fill_with_words(char **res, const char *str, char c, int n)
 {
 	int		i;
 	int		len;
-	char	**res;
 	char	*wordend;
 
 	i = 0;
-	res = (char **)ft_calloc(n + 1, sizeof(char *));
 	while (i < n)
 	{
 		wordend = ft_strchr(str, c);
@@ -43,6 +41,8 @@ char	**ft_fill_with_words(const char *str, char c, int n)
 			wordend = ft_strchr(str, '\0');
 		len = wordend - str;
 		res[i] = (char *)ft_calloc(len + 1, sizeof(char));
+		if (!res[i])
+			return (NULL);
 		ft_strlcpy(res[i], str, len + 1);
 		str = ft_strchr(str, c);
 		if (str)
@@ -61,10 +61,15 @@ char	**ft_split(char const *s, char c)
 	char	**res;
 	int		wordnum;
 
+	if (!s)
+		return (NULL);
 	if (c != 0)
 		s = ft_strtrim(s, &c);
 	wordnum = ft_count_words(s, c);
-	res = ft_fill_with_words(s, c, wordnum);
+	res = (char **)ft_calloc(wordnum + 1, sizeof(char *));
+	if (!res)
+		return (NULL);
+	res = ft_fill_with_words(res, s, c, wordnum);
 	if (!res)
 		return (NULL);
 	if (c != 0)

@@ -6,7 +6,7 @@
 /*   By: dalchaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:30:17 by dalchaev          #+#    #+#             */
-/*   Updated: 2023/02/08 19:40:51 by dalchaev         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:03:45 by dalchaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*res;
 	t_list	*temp;
-	
+
 	res = 0;
 	while (lst)
 	{

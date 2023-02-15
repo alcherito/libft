@@ -6,7 +6,7 @@
 /*   By: dalchaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:29:45 by dalchaev          #+#    #+#             */
-/*   Updated: 2023/01/21 19:52:12 by dalchaev         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:10:07 by dalchaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 
 	i = 0;
 	k = 0;
+	if (dest == NULL && size == 0)
+		return (size);
 	while (dest[i] != '\0' && i < size)
 		i++;
 	while ((i + k + 1) < size && src[k] != '\0')
