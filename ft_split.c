@@ -18,6 +18,8 @@ int	ft_count_words(const char *str, char c)
 	int	n;
 
 	n = 0;
+	while (*str == c && c != 0)
+		str++;
 	while (*str != 0)
 	{
 		if (*str != c && (*(str + 1) == c || *(str + 1) == '\0'))
@@ -27,29 +29,39 @@ int	ft_count_words(const char *str, char c)
 	return (n);
 }
 
-char	**ft_fill_with_words(char **res, const char *str, char c, int n)
+char	**ft_free_arr(char **arr)
+{
+	while (*arr)
+	{
+		free(*arr);
+		arr++;
+	}
+	arr = NULL;
+	return (arr);
+}
+
+char	**ft_fill_with_words(char **res, const char *str, char c)
 {
 	int		i;
 	int		len;
 	char	*wordend;
 
 	i = 0;
-	while (i < n)
+	while (*str)
 	{
+		while (*str == c)
+			str++;
+		if (*str == 0)
+			break ;
 		wordend = ft_strchr(str, c);
-		if (i == n - 1 && c != 0)
+		if (wordend == NULL)
 			wordend = ft_strchr(str, '\0');
 		len = wordend - str;
 		res[i] = (char *)ft_calloc(len + 1, sizeof(char));
 		if (!res[i])
-			return (NULL);
-		ft_strlcpy(res[i], str, len + 1);
-		str = ft_strchr(str, c);
-		if (str)
-		{
-			while (*str == c)
-				str++;
-		}
+			return (ft_free_arr(res));
+		ft_memmove(res[i], str, len);
+		str = wordend;
 		i++;
 	}
 	res[i] = NULL;
@@ -63,16 +75,10 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	if (c != 0)
-		s = ft_strtrim(s, &c);
 	wordnum = ft_count_words(s, c);
-	res = (char **)ft_calloc(wordnum + 1, sizeof(char *));
+	res = (char **)malloc((wordnum + 1) * sizeof(char *));
 	if (!res)
 		return (NULL);
-	res = ft_fill_with_words(res, s, c, wordnum);
-	if (!res)
-		return (NULL);
-	if (c != 0)
-		free((void *)s);
+	ft_fill_with_words(res, s, c);
 	return (res);
 }
